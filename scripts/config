@@ -1,0 +1,27 @@
+#!/bin/bash
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+ynh_abort_if_errors
+
+install_dir=$(ynh_app_setting_get --key=install_dir)
+
+get__instance() {
+    ynh_app_setting_get --key=instance
+}
+
+validate__instance() {
+    if [[ ! "$instance" =~ ^$|^[A-Za-z0-9.-]+$ ]]; then
+        echo "Enter a hostname without https:// or a path."
+    fi
+}
+
+set__instance() {
+    ynh_app_setting_set --key=instance --value="$instance"
+    write_runtime_config
+    chown "$app:www-data" "$install_dir/config.js"
+    chmod o-rwx "$install_dir/config.js"
+}
+
+ynh_app_config_run "$1"

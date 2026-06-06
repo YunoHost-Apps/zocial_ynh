@@ -1,0 +1,34 @@
+#!/bin/bash
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+ynh_script_progression "Setting up source files..."
+
+ynh_setup_source --dest_dir="$install_dir/.build"
+
+chown -R "$app:$app" "$install_dir/.build"
+
+ynh_script_progression "Building $app... (this may take a while)"
+
+pushd "$install_dir/.build"
+    ynh_hide_warnings corepack enable
+    ynh_hide_warnings ynh_exec_as_app pnpm install --frozen-lockfile
+    ynh_hide_warnings ynh_exec_as_app env ZOCIAL_CHANNEL=main LOCALE="$language" pnpm build
+popd
+
+mv "$install_dir/.build/__sapper__/export/"* "$install_dir/"
+write_runtime_config
+
+ynh_safe_rm "$install_dir/.build"
+ynh_safe_rm "$install_dir/.cache"
+ynh_safe_rm "$install_dir/.local"
+ynh_safe_rm "$install_dir/.npm"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:www-data" "$install_dir"
+
+ynh_script_progression "Adding system configurations related to $app..."
+
+ynh_config_add_nginx
+
+ynh_script_progression "Installation of $app completed."

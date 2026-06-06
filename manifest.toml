@@ -1,0 +1,76 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/main/schemas/manifest.v2.schema.json
+
+packaging_format = 2
+
+id = "zocial"
+name = "Zocial"
+description.en = "Modern, accessible fediverse client based on Enafore"
+description.fr = "Client fediverse moderne et accessible basé sur Enafore"
+
+version = "1.0.0~ynh1"
+
+maintainers = ["serrebidev"]
+
+[upstream]
+license = "AGPL-3.0-only"
+website = "https://zocial.ztfr.eu"
+demo = "https://zocial.ztfr.eu"
+admindoc = "https://git.ztfr.eu/Dome/Zocial/src/branch/main/docs/Admin-Guide.md"
+userdoc = "https://git.ztfr.eu/Dome/Zocial/src/branch/main/docs/User-Guide.md"
+code = "https://git.ztfr.eu/Dome/Zocial"
+
+[integration]
+yunohost = ">= 12.1.17"
+helpers_version = "2.1"
+architectures = "all"
+multi_instance = true
+
+ldap = false
+sso = false
+
+disk = "1G"
+ram.build = "2G"
+ram.runtime = "50M"
+
+[install]
+    [install.domain]
+    type = "domain"
+
+    [install.init_main_permission]
+    type = "group"
+    default = "visitors"
+
+    [install.instance]
+    ask.en = "Mastodon instance hostname"
+    ask.fr = "Nom d'hôte de l'instance Mastodon"
+    help.en = "Lock Zocial to this instance. Leave empty to allow users to connect to any instance."
+    help.fr = "Verrouille Zocial sur cette instance. Laissez vide pour autoriser la connexion à toute instance."
+    type = "string"
+    optional = true
+    default = ""
+    pattern.regexp = '^$|^[A-Za-z0-9.-]+$'
+    pattern.error = "Enter a hostname without https:// or a path."
+
+    [install.language]
+    ask.en = "Choose the application language"
+    ask.fr = "Choisissez la langue de l'application"
+    type = "select"
+    choices = ["de", "en-US", "es", "fr", "ru-RU"]
+    default = "en-US"
+
+[resources]
+    [resources.sources]
+        [resources.sources.main]
+        url = "https://git.ztfr.eu/Dome/Zocial/archive/f96d89f5df6cf2ccd61996074385703e2559a6b4.tar.gz"
+        sha256 = "ef827c1727d22354ed507e89ae60dc4368ea3bb303ee21e4e8afcba0b6f494cb"
+
+    [resources.system_user]
+
+    [resources.install_dir]
+    group = "www-data:r-x"
+
+    [resources.permissions]
+    main.url = "/"
+
+    [resources.nodejs]
+    version = "20"

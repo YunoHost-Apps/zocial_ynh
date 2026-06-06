@@ -1,0 +1,22 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/main/schemas/config_panel.v1.schema.json
+
+version = "1.0"
+
+[main]
+name.en = "Zocial configuration"
+name.fr = "Configuration de Zocial"
+
+    [main.instance]
+    name.en = "Fediverse instance"
+    name.fr = "Instance fediverse"
+
+        [main.instance.instance]
+        ask.en = "Mastodon instance hostname"
+        ask.fr = "Nom d'hôte de l'instance Mastodon"
+        help.en = "Leave empty to allow users to connect to any instance."
+        help.fr = "Laissez vide pour autoriser la connexion à toute instance."
+        type = "string"
+        optional = true
+        pattern.regexp = '^$|^[A-Za-z0-9.-]+$'
+        pattern.error = "Enter a hostname without https:// or a path."
+        bind = "null"

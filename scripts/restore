@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source /usr/share/yunohost/helpers
+
+ynh_script_progression "Restoring $app main directory..."
+
+ynh_restore "$install_dir"
+
+ynh_script_progression "Restoring system configurations related to $app..."
+
+ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
+
+ynh_script_progression "Reloading web server..."
+
+ynh_systemctl --service=nginx --action=reload
+
+ynh_script_progression "Restoration completed for $app"

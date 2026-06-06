@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source /usr/share/yunohost/helpers
+
+ynh_script_progression "Removing system configurations related to $app..."
+
+ynh_config_remove_nginx
+
+ynh_script_progression "Removal of $app completed."
