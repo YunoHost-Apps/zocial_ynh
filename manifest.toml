@@ -7,7 +7,7 @@ name = "Zocial"
 description.en = "Modern, accessible fediverse client based on Enafore"
 description.fr = "Client fediverse moderne et accessible basé sur Enafore"
 
-version = "1.11.0~ynh1"
+version = "1.12.0~ynh1"
 
 maintainers = ["serrebidev"]
 
@@ -61,8 +61,8 @@ ram.runtime = "50M"
 [resources]
     [resources.sources]
         [resources.sources.main]
-        url = "https://git.ztfr.eu/Dome/Zocial/archive/e3d5af23a0e443863f9112d489d63bb12840b71e.tar.gz"
-        sha256 = "6e24ed9b7dc3fe0f191eafa834237915fac3005959231ac165a537c59a10c456"
+        url = "https://git.ztfr.eu/api/v1/repos/Dome/Zocial/archive/c6434e7c5fd59a6c42d2f1d9745f2ba0273224af.tar.gz"
+        sha256 = "74603f070bd33faaab23bc2f031e37c346a7be7535aa05f765f0bdf4ea640a07"
 
     [resources.system_user]
 
