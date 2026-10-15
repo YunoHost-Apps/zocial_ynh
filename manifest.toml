@@ -61,7 +61,7 @@ ram.runtime = "50M"
 [resources]
     [resources.sources]
         [resources.sources.main]
-        url = "https://git.ztfr.eu/api/v1/repos/Dome/Zocial/archive/c6434e7c5fd59a6c42d2f1d9745f2ba0273224af.tar.gz"
+        url = "https://git.ztfr.eu/api/v1/repos/Dome/Zocial/archive/1.12.0.tar.gz"
         sha256 = "74603f070bd33faaab23bc2f031e37c346a7be7535aa05f765f0bdf4ea640a07"
 
     [resources.system_user]
